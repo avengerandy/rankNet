@@ -3,3 +3,4 @@ venv/
 dataset/*
 !dataset/toyItemDict.json
 !dataset/toyRankItem.json
+!dataset/getRankItem.js
