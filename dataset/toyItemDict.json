@@ -1,0 +1,102 @@
+{
+    "1": {
+        "dl_count": 1,
+        "wishlist_count": 1,
+        "rate_average_2dp": 1.0,
+        "rate_count": 1,
+        "rate_count_detail": [1, 1, 1, 1, 1],
+        "review_count": 1,
+        "price": 1,
+        "regist_date": "2024-01-01 00:00:00"
+    },
+    "2": {
+        "dl_count": 2,
+        "wishlist_count": 2,
+        "rate_average_2dp": 2.0,
+        "rate_count": 2,
+        "rate_count_detail": [2, 2, 2, 2, 2],
+        "review_count": 2,
+        "price": 2,
+        "regist_date": "2024-02-01 00:00:00"
+    },
+    "3": {
+        "dl_count": 3,
+        "wishlist_count": 3,
+        "rate_average_2dp": 3.0,
+        "rate_count": 3,
+        "rate_count_detail": [3, 3, 3, 3, 3],
+        "review_count": 3,
+        "price": 3,
+        "regist_date": "2024-03-01 00:00:00"
+    },
+    "4": {
+        "dl_count": 4,
+        "wishlist_count": 4,
+        "rate_average_2dp": 4.0,
+        "rate_count": 4,
+        "rate_count_detail": [4, 4, 4, 4, 4],
+        "review_count": 4,
+        "price": 4,
+        "regist_date": "2024-04-01 00:00:00"
+    },
+    "5": {
+        "dl_count": 5,
+        "wishlist_count": 5,
+        "rate_average_2dp": 5.0,
+        "rate_count": 5,
+        "rate_count_detail": [5, 5, 5, 5, 5],
+        "review_count": 5,
+        "price": 5,
+        "regist_date": "2024-05-01 00:00:00"
+    },
+    "6": {
+        "dl_count": 6,
+        "wishlist_count": 6,
+        "rate_average_2dp": 6.0,
+        "rate_count": 6,
+        "rate_count_detail": [6, 6, 6, 6, 6],
+        "review_count": 6,
+        "price": 6,
+        "regist_date": "2024-06-01 00:00:00"
+    },
+    "7": {
+        "dl_count": 7,
+        "wishlist_count": 7,
+        "rate_average_2dp": 7.0,
+        "rate_count": 7,
+        "rate_count_detail": [7, 7, 7, 7, 7],
+        "review_count": 7,
+        "price": 7,
+        "regist_date": "2024-07-01 00:00:00"
+    },
+    "8": {
+        "dl_count": 8,
+        "wishlist_count": 8,
+        "rate_average_2dp": 8.0,
+        "rate_count": 8,
+        "rate_count_detail": [8, 8, 8, 8, 8],
+        "review_count": 8,
+        "price": 8,
+        "regist_date": "2024-08-01 00:00:00"
+    },
+    "9": {
+        "dl_count": 9,
+        "wishlist_count": 9,
+        "rate_average_2dp": 9.0,
+        "rate_count": 9,
+        "rate_count_detail": [9, 9, 9, 9, 9],
+        "review_count": 9,
+        "price": 9,
+        "regist_date": "2024-09-01 00:00:00"
+    },
+    "10": {
+        "dl_count": 10,
+        "wishlist_count": 10,
+        "rate_average_2dp": 10.0,
+        "rate_count": 10,
+        "rate_count_detail": [10, 10, 10, 10, 10],
+        "review_count": 10,
+        "price": 10,
+        "regist_date": "2024-10-01 00:00:00"
+    }
+}
