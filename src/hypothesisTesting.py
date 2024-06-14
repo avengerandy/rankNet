@@ -14,12 +14,14 @@ trainFeaturesList, testFeaturesList = train_test_split(asmrFeaturesList, test_si
 trainFeaturesList = numpy.array(trainFeaturesList)
 testFeaturesList = numpy.array(testFeaturesList)
 
+print('sameRankingPage:')
 featureSize = len(trainFeaturesList[0])
 for featureIndex in range(featureSize):
     print(stats.kruskal(trainFeaturesList[:, featureIndex], testFeaturesList[:, featureIndex]))
 
 print('================================================================')
 
+print('otherRankingPage:')
 with open('./dataset/gameAllItemDict.json', 'r') as infile:
     itemDict = json.load(infile)
 

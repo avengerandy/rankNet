@@ -1,11 +1,12 @@
 import json
+import pickle
 import torch
 from torch import optim
 from torch.utils.data import DataLoader
 from dataset import *
 from model import *
 
-def trainTestWithSameRankingPage(printResult = True):
+def trainTestWithSameRankingPage(printResult = True, saveModel = False):
     with open('./dataset/asmrAllItemDict.json', 'r') as infile:
         itemDict = json.load(infile)
     with open('./dataset/asmrAllRankItem.json', 'r') as infile:
@@ -22,16 +23,20 @@ def trainTestWithSameRankingPage(printResult = True):
     for i in range(epoch):
         trainCurrentRate = train(dataloader, model, lossFunction, optimizer)
         if (printResult):
-            print(f'epoch{i} trainCurrentRate: {trainCurrentRate:.2f}') 
+            print(f'epoch{i} trainCurrentRate: {trainCurrentRate:.2f}')
 
     postivePairsDataset, _ = getNormalizedDataset(testRankItem, itemDict, minMaxScaler)
     dataloader = DataLoader(postivePairsDataset, batch_size = 64, shuffle = False)
     testCurrentRate = test(dataloader, model)
     if (printResult):
         print(f'testCurrentRate: {testCurrentRate:.2f}')
+    if (saveModel):
+        torch.save(model.state_dict(), './checkpoint/sameRankingPageStateDict')
+        with open('./checkpoint/sameRankingPageMinMaxScaler.pkl', 'wb') as file:
+            pickle.dump(minMaxScaler, file) 
     return trainCurrentRate, testCurrentRate
 
-def trainTestWithOtherRankingPage(learningRate = 0.001, l1Weight = 0.001, l2Weight = 0.001, shareScaler = False, printResult = True):
+def trainTestWithOtherRankingPage(learningRate = 0.001, l1Weight = 0.001, l2Weight = 0.001, shareScaler = False, printResult = True, saveModel = False):
     with open('./dataset/asmrAllItemDict.json', 'r') as infile:
         itemDict = json.load(infile)
     with open('./dataset/asmrAllRankItem.json', 'r') as infile:
@@ -62,6 +67,10 @@ def trainTestWithOtherRankingPage(learningRate = 0.001, l1Weight = 0.001, l2Weig
     testCurrentRate = test(dataloader, model)
     if (printResult):
         print(f'testCurrentRate: {testCurrentRate:.2f}')
+    if (saveModel):
+        torch.save(model.state_dict(), './checkpoint/otherRankingPageStateDict')
+        with open('./checkpoint/otherRankingPageMinMaxScaler.pkl', 'wb') as file:
+            pickle.dump(minMaxScaler, file)
 
     return trainCurrentRate, testCurrentRate
 
@@ -69,5 +78,8 @@ if __name__ == '__main__':
     print('trainTestWithSameRankingPage')
     trainTestWithSameRankingPage()
     print('=============================')
-    print('trainTestWithOtherRankingPage')
+    print('trainTestWithOtherRankingPage (original)')
+    trainTestWithOtherRankingPage(learningRate = 0.01, l1Weight = 0, l2Weight = 0, shareScaler = True)
+    print('=============================')
+    print('trainTestWithOtherRankingPage (modified)')
     trainTestWithOtherRankingPage()

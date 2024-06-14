@@ -1,6 +1,7 @@
 */__pycache__/
 venv/
 dataset/*
+checkpoint/*
 !dataset/toyItemDict.json
 !dataset/toyRankItem.json
 !dataset/getRankItem.js
