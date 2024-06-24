@@ -6,6 +6,9 @@ from torch.utils.data import DataLoader
 from dataset import *
 from model import *
 
+BATCH_SIZE = 64
+EPOCH = 20
+
 def trainTestWithSameRankingPage(printResult = True, saveModel = False):
     with open('./dataset/asmrAllItemDict.json', 'r') as infile:
         itemDict = json.load(infile)
@@ -14,19 +17,19 @@ def trainTestWithSameRankingPage(printResult = True, saveModel = False):
 
     rankItem, testRankItem = orderedTrainTestSplit(rankItem, 0.1)
     postivePairsDataset, minMaxScaler = getNormalizedDataset(rankItem, itemDict)
-    dataloader = DataLoader(postivePairsDataset, batch_size = 64, shuffle = True)
+    dataloader = DataLoader(postivePairsDataset, batch_size = BATCH_SIZE, shuffle = True)
 
     model = RankNet().to(getDevice())
     lossFunction = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr = 0.01, weight_decay = 0)
-    epoch = 3
+    epoch = EPOCH
     for i in range(epoch):
         trainCurrentRate = train(dataloader, model, lossFunction, optimizer)
         if (printResult):
             print(f'epoch{i} trainCurrentRate: {trainCurrentRate:.2f}')
 
     postivePairsDataset, _ = getNormalizedDataset(testRankItem, itemDict, minMaxScaler)
-    dataloader = DataLoader(postivePairsDataset, batch_size = 64, shuffle = False)
+    dataloader = DataLoader(postivePairsDataset, batch_size = BATCH_SIZE, shuffle = False)
     testCurrentRate = test(dataloader, model)
     if (printResult):
         print(f'testCurrentRate: {testCurrentRate:.2f}')
@@ -43,12 +46,12 @@ def trainTestWithOtherRankingPage(learningRate = 0.001, l1Weight = 0.001, l2Weig
         rankItem = json.load(infile)
 
     postivePairsDataset, minMaxScaler = getNormalizedDataset(rankItem, itemDict)
-    dataloader = DataLoader(postivePairsDataset, batch_size = 64, shuffle = True)
+    dataloader = DataLoader(postivePairsDataset, batch_size = BATCH_SIZE, shuffle = True)
 
     model = RankNet().to(getDevice())
     lossFunction = nn.BCEWithLogitsLoss()
     optimizer = optim.Adam(model.parameters(), lr = learningRate, weight_decay = l2Weight)
-    epoch = 3
+    epoch = EPOCH
     for i in range(epoch):
         trainCurrentRate = train(dataloader, model, lossFunction, optimizer, l1Weight)
         if (printResult):
@@ -63,7 +66,7 @@ def trainTestWithOtherRankingPage(learningRate = 0.001, l1Weight = 0.001, l2Weig
         postivePairsDataset, minMaxScaler = getNormalizedDataset(rankItem, itemDict, minMaxScaler)
     else:
         postivePairsDataset, minMaxScaler = getNormalizedDataset(rankItem, itemDict)
-    dataloader = DataLoader(postivePairsDataset, batch_size = 64, shuffle = False)
+    dataloader = DataLoader(postivePairsDataset, batch_size = BATCH_SIZE, shuffle = False)
     testCurrentRate = test(dataloader, model)
     if (printResult):
         print(f'testCurrentRate: {testCurrentRate:.2f}')
