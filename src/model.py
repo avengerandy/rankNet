@@ -47,7 +47,7 @@ def train(dataloader, model, lossFunction, optimizer, l1Weight = 0):
 
         loss.backward()
         optimizer.step()
-        
+
         currentCount = currentCount + (out > 0).sum().item()
 
     datasetSize = len(dataloader.dataset)

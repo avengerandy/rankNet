@@ -1,6 +1,7 @@
+# learning DLsite trend function by rankNet
 
 ```log
-$ python src/train.py 
+$ python src/train.py
 trainTestWithSameRankingPage
 epoch0 trainCurrentRate: 0.65
 epoch1 trainCurrentRate: 0.69
@@ -21,7 +22,7 @@ testCurrentRate: 0.63
 ```
 
 ```log
-$ python src/hypothesisTesting.py 
+$ python src/hypothesisTesting.py
 sameRankingPage:
 KruskalResult(statistic=1.0812276101266591, pvalue=0.2984230935024443)
 KruskalResult(statistic=1.2293546877250272, pvalue=0.2675325726507133)

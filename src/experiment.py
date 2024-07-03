@@ -42,10 +42,10 @@ print(f'modifiedStd: {modifiedStd:.2f}')
 print('==========================')
 
 print('hypothesisTesting')
-print(stats.ttest_ind_from_stats( 
+print(stats.ttest_ind_from_stats(
     mean1 = originalMean,
     std1 = originalStd,
-    nobs1 = repeatTimes,   
+    nobs1 = repeatTimes,
     mean2 = modifiedMean,
     std2 = modifiedStd,
     nobs2 = repeatTimes

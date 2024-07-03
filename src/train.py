@@ -36,7 +36,7 @@ def trainTestWithSameRankingPage(printResult = True, saveModel = False):
     if (saveModel):
         torch.save(model.state_dict(), './checkpoint/sameRankingPageStateDict')
         with open('./checkpoint/sameRankingPageMinMaxScaler.pkl', 'wb') as file:
-            pickle.dump(minMaxScaler, file) 
+            pickle.dump(minMaxScaler, file)
     return trainCurrentRate, testCurrentRate
 
 def trainTestWithOtherRankingPage(learningRate = 0.001, l1Weight = 0.001, l2Weight = 0.001, shareScaler = False, printResult = True, saveModel = False):
