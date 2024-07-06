@@ -2,7 +2,7 @@
 
 <a href="https://github.com/avengerandy/rankNet/actions"><img src="https://github.com/avengerandy/rankNet/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
 
-![05_rankNetArch](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/05_rankNetArch.png")
+![05_rankNetArch](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/05_rankNetArch.png)
 
 A study about learning DLsite trend function by rankNet and its distribution shift. For more detailed instructions, please see my blog post.
 
@@ -57,11 +57,11 @@ This repository does not provide the real dataset (I do not own the copyright). 
 
 I grab dataset directly from the DLsite website.
 
-![10_datasetRank](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/10_datasetRank.png")
+![10_datasetRank](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/10_datasetRank.png)
 
 I write `dataset/getRankItem.js` to help me get `RankItem.json`.
 
-![11_datasetFeature](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/11_datasetFeature.png")
+![11_datasetFeature](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/11_datasetFeature.png)
 
 `ItemDict.json` is from DLsite API.
 
@@ -69,15 +69,15 @@ I write `dataset/getRankItem.js` to help me get `RankItem.json`.
 
 ### train test with same ranking page
 
-![12_orderedTrainTestSplit](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/12_orderedTrainTestSplit.png")
+![12_orderedTrainTestSplit](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/12_orderedTrainTestSplit.png)
 
-![13_samePageResult](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/13_samePageResult.png")
+![13_samePageResult](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/13_samePageResult.png)
 
 ### train test with different ranking page
 
-![14_otherPageTrainTest](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/14_otherPageTrainTest.png")
+![14_otherPageTrainTest](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/14_otherPageTrainTest.png)
 
-![15_otherPageResult](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/15_otherPageResult.png")
+![15_otherPageResult](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/15_otherPageResult.png)
 
 ## Distribution Shift
 
@@ -114,7 +114,7 @@ KruskalResult(statistic=54.25046497908814, pvalue=1.7649537781872029e-13)
 
 Hypothesis Testing result shows training、testing with different ranking page will occer distribution shift.
 
-![23_otherPageResultL1L2Nor](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/23_otherPageResultL1L2Nor.png")
+![23_otherPageResultL1L2Nor](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/23_otherPageResultL1L2Nor.png)
 
 ```
 ==========================
