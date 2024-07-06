@@ -1,0 +1,36 @@
+name: tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  tests:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ['3.12']
+
+    name: python ${{ matrix.python-versions }} test
+
+    steps:
+
+      - name: Checks out
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-versions }}
+
+      - name: Install requirements
+        run: pip install -r requirements.txt --progress-bar off
+
+      - name: Install pytorch requirements
+        run: pip install -r pytorchRequirements.txt --progress-bar off --index-url https://download.pytorch.org/whl/cu121
+
+      - name: dataset preprocessing test
+        run: python -m unittest
