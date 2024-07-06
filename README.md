@@ -4,7 +4,7 @@
 
 ![05_rankNetArch](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/05_rankNetArch.png)
 
-A study about learning DLsite trend function by rankNet and its distribution shift. For more detailed instructions, please see my blog post.
+A study about learning DLsite trend function by rankNet and its distribution shift. For more detailed instructions, please see my [blog post](https://andy850701.pixnet.net/blog/post/576727348).
 
 ## Table of content
 
