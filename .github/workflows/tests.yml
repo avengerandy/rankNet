@@ -32,5 +32,11 @@ jobs:
       - name: Install pytorch requirements
         run: pip install -r pytorchRequirements.txt --progress-bar off --index-url https://download.pytorch.org/whl/cu121
 
+      - uses: szenius/set-timezone@v2.0
+        with:
+          timezoneLinux: 'Asia/Taipei'
+          timezoneMacos: 'Asia/Taipei'
+          timezoneWindows: 'Taipei Standard Time'
+
       - name: dataset preprocessing test
         run: python -m unittest
