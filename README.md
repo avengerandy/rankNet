@@ -1,25 +1,85 @@
 # learning DLsite trend function by rankNet
 
-```log
-$ python src/train.py
-trainTestWithSameRankingPage
-epoch0 trainCurrentRate: 0.65
-epoch1 trainCurrentRate: 0.69
-epoch2 trainCurrentRate: 0.70
-testCurrentRate: 0.71
-=============================
-trainTestWithOtherRankingPage (original)
-epoch0 trainCurrentRate: 0.64
-epoch1 trainCurrentRate: 0.69
-epoch2 trainCurrentRate: 0.71
-testCurrentRate: 0.59
-=============================
-trainTestWithOtherRankingPage (modified)
-epoch0 trainCurrentRate: 0.56
-epoch1 trainCurrentRate: 0.61
-epoch2 trainCurrentRate: 0.63
-testCurrentRate: 0.63
+<a href="https://github.com/avengerandy/rankNet/actions"><img src="https://github.com/avengerandy/rankNet/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
+
+![05_rankNetArch](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/05_rankNetArch.png")
+
+A study about learning DLsite trend function by rankNet and its distribution shift. For more detailed instructions, please see my blog post.
+
+## Table of content
+
+- [Install](#install)
+- [Testing](#testing)
+- [Dataset](#dataset)
+- [Result](#result)
+- [Distribution Shift](#distribution-shift)
+- [License](#license)
+
+## Install
+
+```bash
+pip install -r requirements.txt
+pip install -r pytorchRequirements.txt --index-url https://download.pytorch.org/whl/cu121
 ```
+
+The pytorchRequirements.txt only install pytorch. Change --index-url to suit your hardware and software (CPU、GPU、cuda)
+
+## Testing
+
+```
+$ python -m unittest
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 0.027s
+
+OK
+```
+
+Run dataset preprocessing unittest (some tests depend on timezone `Asia/Taipei`).
+
+## Dataset
+
+```python
+with open('./dataset/asmrAllItemDict.json', 'r') as infile:
+    itemDict = json.load(infile)
+with open('./dataset/asmrAllRankItem.json', 'r') as infile:
+    rankItem = json.load(infile)
+
+rankItem, testRankItem = orderedTrainTestSplit(rankItem, 0.1)
+postivePairsDataset, minMaxScaler = getNormalizedDataset(rankItem, itemDict)
+dataloader = DataLoader(postivePairsDataset, batch_size = BATCH_SIZE, shuffle = True)
+```
+
+* `RankItem.json` dataset save items ranking (by order).
+* `ItemDict.json` dataset save items features.
+
+This repository does not provide the real dataset (I do not own the copyright). But you can get dataset structure in `dataset/toyItemDict.json` and `dataset/toyRankItem.json`.
+
+I grab dataset directly from the DLsite website.
+
+![10_datasetRank](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/10_datasetRank.png")
+
+I write `dataset/getRankItem.js` to help me get `RankItem.json`.
+
+![11_datasetFeature](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/11_datasetFeature.png")
+
+`ItemDict.json` is from DLsite API.
+
+## Result
+
+### train test with same ranking page
+
+![12_orderedTrainTestSplit](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/12_orderedTrainTestSplit.png")
+
+![13_samePageResult](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/13_samePageResult.png")
+
+### train test with different ranking page
+
+![14_otherPageTrainTest](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/14_otherPageTrainTest.png")
+
+![15_otherPageResult](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/15_otherPageResult.png")
+
+## Distribution Shift
 
 ```log
 $ python src/hypothesisTesting.py
@@ -52,31 +112,28 @@ KruskalResult(statistic=0.9354796779285227, pvalue=0.3334430705576221)
 KruskalResult(statistic=54.25046497908814, pvalue=1.7649537781872029e-13)
 ```
 
-```log
-$ python src/experiment.py
-originalCurrentRateRecords
-originalMean: 0.59
-originalStd: 0.01
+Hypothesis Testing result shows training、testing with different ranking page will occer distribution shift.
+
+![23_otherPageResultL1L2Nor](https://raw.githubusercontent.com/avengerandy/rankNet/master/img/23_otherPageResultL1L2Nor.png")
+
+```
 ==========================
-modifiedCurrentRateRecords
-modifiedMean: 0.62
+originalCurrentRateRecords
+originalMean: 0.56
+originalStd: 0.02
+==========================
+modifiedCurrentRateRecords (L1、L2 regularization and normalization testing data)
+modifiedMean: 0.61
 modifiedStd: 0.01
 ==========================
 hypothesisTesting
-Ttest_indResult(statistic=-7.422601959112843, pvalue=6.640167006148289e-09)
-KruskalResult(statistic=22.41274160255207, pvalue=2.199102600927154e-06)
+Ttest_indResult(statistic=-11.262083804733697, pvalue=1.1346763672447975e-13)
+KruskalResult(statistic=28.839030684057438, pvalue=7.865007317601521e-08)
+==========================
 ```
 
-```log
-trainTestWithSameRankingPage
-$ python src/eval.py
-0.9401113752916035
+Add L1、L2 regularization and normalization testing data to improve distribution shift.
 
-trainTestWithOtherRankingPage (original)
-$ python src/eval.py
-0.9051408339908514
+# License
 
-trainTestWithOtherRankingPage (modified)
-$ python src/eval.py
-0.9353777722502167
-```
+MIT License
